@@ -3,9 +3,11 @@
  */
 package com.musala.service;
 
-import org.springframework.stereotype.Service;
+import java.util.List;
 
 import com.musala.dto.DroneDto;
+import com.musala.dto.MedicationDto;
+import com.musala.exception.DroneDoesNotExistException;
 import com.musala.exception.OverWeightException;
 
 /**
@@ -15,7 +17,14 @@ import com.musala.exception.OverWeightException;
 
 public interface DroneService  {
 
-	public DroneDto register(DroneDto droneDto) throws OverWeightException;
+	public DroneDto register(DroneDto droneDto);
 	
+	public void loadDrone(String  serinalNumber,List<MedicationDto> medicationList) throws OverWeightException,DroneDoesNotExistException;
+	
+	public List<MedicationDto>  getMedicationList(String  serinalNumber) throws DroneDoesNotExistException;
+	
+	public List<DroneDto>  getAvaialbleDrones();
+	
+	public String  getBatteryLevel(String  serinalNumber) throws DroneDoesNotExistException;
 	
 }

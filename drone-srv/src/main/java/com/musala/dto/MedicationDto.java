@@ -2,52 +2,61 @@ package com.musala.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotNull;
+
 
 public class MedicationDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private String code;
+	@NotNull(message = "medicationCode can not be null")
+	private String medicationCode;;
 
-	private String name;
+	@NotNull(message = "medicationName can not be null")
+	private String medicationName;;
 
-	private Integer weight;
+	@NotNull(message = "medicationWeight can not be null")
+	private Integer medicationWeight;
 
-	private String image;
+	private String medicationImage;;
 
 	private Integer createdBy;
 
 	private Integer modifiedBy;
 
-	public String getCode() {
-		return code;
+	public String getMedicationCode() {
+		return medicationCode;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public void setMedicationCode(String medicationCode) {
+		this.medicationCode = medicationCode;
 	}
 
-	public String getName() {
-		return name;
+	public String getMedicationName() {
+		return medicationName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setMedicationName(String medicationName) {
+		this.medicationName = medicationName;
 	}
 
-	public Integer getWeight() {
-		return weight;
+	public Integer getMedicationWeight() {
+		return medicationWeight;
 	}
 
-	public void setWeight(Integer weight) {
-		this.weight = weight;
+	public void setMedicationWeight(Integer medicationWeight) {
+		this.medicationWeight = medicationWeight;
 	}
 
-	public String getImage() {
-		return image;
+	public String getMedicationImage() {
+		return medicationImage;
 	}
 
-	public void setImage(String image) {
-		this.image = image;
+	public void setMedicationImage(String medicationImage) {
+		this.medicationImage = medicationImage;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	public Integer getCreatedBy() {
@@ -68,11 +77,9 @@ public class MedicationDto implements Serializable {
 
 	@Override
 	public String toString() {
-		return "MedicationDto [code=" + code + ", name=" + name + ", weight=" + weight + ", image=" + image
-				+ ", createdBy=" + createdBy + ", modifiedBy=" + modifiedBy + "]";
+		return "MedicationDto [medicationCode=" + medicationCode + ", medicationName=" + medicationName
+				+ ", medicationWeight=" + medicationWeight + ", medicationImage=" + medicationImage + ", createdBy="
+				+ createdBy + ", modifiedBy=" + modifiedBy + "]";
 	}
 
-	
-	
-	
 }

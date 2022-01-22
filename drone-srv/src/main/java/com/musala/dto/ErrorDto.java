@@ -4,23 +4,24 @@ package com.musala.dto;
 import java.util.Date;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.musala.enums.ErrorCodeEnum;
 
 
 public class ErrorDto {
 
 
-	private String errormsg;
+	private ErrorCodeEnum errorCode;
+	private String errorMsg;
 	private HttpStatus status;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
 	private Date timestamp;
 
-	public ErrorDto( HttpStatus status, Date timestamp, String errormsg) {
-		this.status = status;
-		this.timestamp = timestamp;
-		this.errormsg = errormsg;
+	public ErrorDto(ErrorCodeEnum errorCode, String errorMsg,Date timestamp) {
+		this.errorCode=errorCode;
+		this.errorMsg=errorMsg;
+		this.timestamp=timestamp;
+		
 	}
 
 	public HttpStatus getStatus() {
@@ -41,19 +42,27 @@ public class ErrorDto {
 		this.timestamp = timestamp;
 	}
 
-	public String getErrormsg() {
-		return errormsg;
+	public ErrorCodeEnum getErrorCode() {
+		return errorCode;
 	}
 
-	public void setErrormsg(String errormsg) {
-		this.errormsg = errormsg;
+	public void setErrorCode(ErrorCodeEnum errorCode) {
+		this.errorCode = errorCode;
+	}
+
+	public String getErrorMsg() {
+		return errorMsg;
+	}
+
+	public void setErrorMsg(String errorMsg) {
+		this.errorMsg = errorMsg;
 	}
 
 	@Override
 	public String toString() {
-		return "ErrorDto [errormsg=" + errormsg + ", status=" + status + ", timestamp=" + timestamp + "]";
+		return "ErrorDto [errorCode=" + errorCode + ", errorMsg=" + errorMsg + ", status=" + status + ", timestamp="
+				+ timestamp + "]";
 	}
 
-	
 
 }

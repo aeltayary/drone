@@ -25,12 +25,14 @@ public class Drone implements Serializable {
 
 	private Integer battery;
 
+	@Column(name="created",insertable = false,updatable = false)
 	@CreatedDate
 	private Timestamp created;
 
 	@Column(name="created_by")
 	private Integer createdBy;
 
+	@Column(name="modified",insertable = false,updatable = false)
 	@LastModifiedDate
 	private Timestamp modified;
 

@@ -1,12 +1,19 @@
 package com.musala.db.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import java.sql.Timestamp;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-
-import java.sql.Timestamp;
 
 /**
  * The persistent class for the cargo database table.
@@ -36,14 +43,16 @@ public class Cargo implements Serializable {
 
 	@Column(name = "medication_image")
 	@Lob
-	private byte[] image;
+	private byte[] medicationImage;
 
+	@Column(name = "created", insertable = false, updatable = false)
 	@CreatedDate
 	private Timestamp created;
 
 	@Column(name = "created_by")
 	private Integer createdBy;
 
+	@Column(name = "modified", insertable = false, updatable = false)
 	@LastModifiedDate
 	private Timestamp modified;
 
@@ -90,12 +99,13 @@ public class Cargo implements Serializable {
 		this.medicationWeight = medicationWeight;
 	}
 
-	public byte[] getImage() {
-		return image;
+	
+	public byte[] getMedicationImage() {
+		return this.medicationImage;
 	}
 
-	public void setImage(byte[] image) {
-		this.image = image;
+	public void setMedicationImage(byte[] medicationImage) {
+		this.medicationImage = medicationImage;
 	}
 
 	public Timestamp getCreated() {
