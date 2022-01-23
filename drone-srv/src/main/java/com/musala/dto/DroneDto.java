@@ -2,32 +2,26 @@ package com.musala.dto;
 
 import java.io.Serializable;
 
-import com.musala.enums.ModelEnum;
-import com.musala.enums.StateEnum;
-
-import io.swagger.v3.oas.annotations.media.Schema;
-
-import java.util.List;
-
-import javax.validation.Valid;
 import javax.validation.constraints.Max;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.Length;
+import com.musala.enums.ModelEnum;
+import com.musala.enums.StateEnum;
 
 
 public class DroneDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@NotEmpty
+	@NotBlank(message = "serial number can not be blank")
 	@Size(max = 100, message = "serial number max length is 100")
 	private String serialNumber;
 
 	@NotNull(message = "weightLimit can not be null")
 	@Max(value = 500 , message ="max weight limit is 500gr" )
 	private Integer weightLimit;
+
 
 	@NotNull(message = "model can not be null")
 	private ModelEnum model;

@@ -1,13 +1,20 @@
 package com.musala.db.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import java.sql.Timestamp;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-
-import java.sql.Timestamp;
-import java.util.List;
 
 
 /**
@@ -47,7 +54,7 @@ public class Drone implements Serializable {
 
 	//bi-directional many-to-one association to Cargo
 	@OneToMany(mappedBy="drone")
-	private List<Cargo> cargos;
+	private List<Cargo> cargo;
 
 	//bi-directional many-to-one association to Model
 	@ManyToOne
@@ -124,23 +131,23 @@ public class Drone implements Serializable {
 		this.weightLimit = weightLimit;
 	}
 
-	public List<Cargo> getCargos() {
-		return this.cargos;
+	public List<Cargo> getCargo() {
+		return this.cargo;
 	}
 
-	public void setCargos(List<Cargo> cargos) {
-		this.cargos = cargos;
+	public void setCargos(List<Cargo> cargo) {
+		this.cargo = cargo;
 	}
 
 	public Cargo addCargo(Cargo cargo) {
-		getCargos().add(cargo);
+		getCargo().add(cargo);
 		cargo.setDrone(this);
 
 		return cargo;
 	}
 
 	public Cargo removeCargo(Cargo cargo) {
-		getCargos().remove(cargo);
+		getCargo().remove(cargo);
 		cargo.setDrone(null);
 
 		return cargo;

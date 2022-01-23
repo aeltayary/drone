@@ -8,15 +8,19 @@ package com.musala.enums;
  *
  */
 public enum ModelEnum {
-	IDLE(1), LOADING(2), LOADED(3), DELIVERING(4), DELIVERED(5),
-	RETURNING(6);
+
+	LIGHTWEIGHT(1), MIDDLEWEIGHT(2), CRUSIEWEIGHTT(3), HEAVEYWEIGHT(4);
+
 	private Integer id;
 
-	ModelEnum(int id) {
+
+	ModelEnum(Integer id) {
 		this.id = id;
-		
+
 	}
+
 	public Integer getId() {
 		return id;
 	}
+
 }

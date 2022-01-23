@@ -2,16 +2,23 @@ package com.musala.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+
 
 
 public class MedicationDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@NotNull(message = "medicationCode can not be null")
+
+	@NotBlank(message = "medicationCode can not be null or empty ")
+	@Pattern(regexp = "^[A-Z0-9_-]*$", message = "upper case letters, underscore and numbers are only allowed for this field ")
 	private String medicationCode;;
 
-	@NotNull(message = "medicationName can not be null")
+	@NotBlank(message = "medicationName can not be null or empty")
+	@Pattern(regexp = "^[a-zA-Z0-9_-]*$", message = "letters, underscore and numbers only allowed for this field ")
 	private String medicationName;;
 
 	@NotNull(message = "medicationWeight can not be null")

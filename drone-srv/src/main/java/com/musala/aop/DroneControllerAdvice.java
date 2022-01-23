@@ -6,6 +6,8 @@ package com.musala.aop;
 import java.util.Date;
 import java.util.StringJoiner;
 
+import javax.validation.ConstraintViolationException;
+
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.ObjectError;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.musala.dto.ErrorDto;
 import com.musala.enums.ErrorCodeEnum;
+import com.musala.exception.DroneAlreadyExistException;
 import com.musala.exception.DroneDoesNotExistException;
 import com.musala.exception.OverWeightException;
 
@@ -29,6 +32,14 @@ public class DroneControllerAdvice {
 
 
 	
+	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
+	@ResponseBody
+	@ExceptionHandler(DroneAlreadyExistException.class)
+	public ErrorDto handleDroneAlreadyExistException(DroneAlreadyExistException ex) {
+		return new ErrorDto(ErrorCodeEnum.DRONE_ALREADY_EXISTS, ex.getMessage(), new Date());
+
+	}
+
 	@ResponseStatus(code = HttpStatus.NOT_FOUND)
 	@ResponseBody
 	@ExceptionHandler(DroneDoesNotExistException.class)
@@ -42,6 +53,14 @@ public class DroneControllerAdvice {
 	@ExceptionHandler(OverWeightException.class)
 	public ErrorDto handleOverWeightException(OverWeightException ex) {
 		return new ErrorDto(ErrorCodeEnum.VALIDATION_ERROR, ex.getMessage(),new Date() );
+
+	}
+
+	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(ConstraintViolationException.class)
+	@ResponseBody
+	public ErrorDto handleConstraintViolationException(ConstraintViolationException ex) {
+		return new ErrorDto(ErrorCodeEnum.VALIDATION_ERROR, ex.getMessage(), new Date());
 
 	}
 
