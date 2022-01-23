@@ -96,6 +96,19 @@ CONSTRAINT fk_drone_id foreign key(drone_id) references drone(id)
 ) ;
 
 
+DROP TABLE IF EXISTS dronedb.drone_battery_audit;
+CREATE TABLE dronedb.drone_audit (
+id int  NOT NULL AUTO_INCREMENT,
+drone_id int NOT NULL,
+activity_id int NOT NULL,
+old_value varchar(100) NOT NULL,
+new_value varchar(100) NOT NULL,
+created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+CONSTRAINT pk_drone_battery_audit primary key(id),
+CONSTRAINT fk_audit_drone_id foreign key(drone_id) references drone(id)
+) ;
+
+
 
 
 
