@@ -23,6 +23,7 @@ import com.musala.db.repository.ModelRepository;
 import com.musala.db.repository.StateRepository;
 import com.musala.dto.DroneDto;
 import com.musala.dto.MedicationDto;
+import com.musala.enums.ModelEnum;
 import com.musala.enums.StateEnum;
 import com.musala.exception.DroneAlreadyExistException;
 import com.musala.exception.DroneDoesNotExistException;
@@ -38,13 +39,13 @@ import com.musala.service.DroneService;
 @Transactional
 public class DroneServiceImpl implements DroneService {
 
-	private static final String OVER_WEIGHT_MSG_PATTERN = "Items total weight %d exceeds drome weight limit %d";
+	private static final String OVER_WEIGHT_MSG_PATTERN = "Items total weight will exceed current drone weight limit %d";
 
 	private static final String DRONE_ALREADY_EXISTS_PATTERN = "Drone with serial number %s  already exists";
 
 	private static final String DRONE_DOES_NOT_EXIST_MSG_PATTERN = "Drone with serial number %s  does not exist";
 
-	private static final String DRONE_LOW_BATTERY_MSG_PATTERN = "Drone with serial number %s  has low batter";
+	private static final String DRONE_LOW_BATTERY_MSG_PATTERN = "Drone with serial number %s  has low battery";
 
 	private static final Integer LOW_BATTERY_PERECENTAGE = 25;
 
@@ -62,6 +63,7 @@ public class DroneServiceImpl implements DroneService {
 
 
 	/**
+	 * Register/create drone
 	 * 
 	 * @param droneDto
 	 * @return
@@ -86,6 +88,7 @@ public class DroneServiceImpl implements DroneService {
 
 
 	/**
+	 * Load drone with list of medication
 	 * 
 	 * @param serinalNumber
 	 * @param medicationList
@@ -105,6 +108,8 @@ public class DroneServiceImpl implements DroneService {
 			medicationList.stream().forEach(med -> {
 				Cargo cargoBean = new Cargo();
 				BeanUtils.copyProperties(med, cargoBean);
+				cargoBean.setMedicationImage(
+						med.getMedicationImage() == null ? null : med.getMedicationImage().getBytes());
 				cargoBean.setDrone(droneBean);
 				cargoBeanList.add(cargoBean);
 			});
@@ -118,6 +123,8 @@ public class DroneServiceImpl implements DroneService {
 	}
 
 	/**
+	 * Valid Cargo regarding the weight and the current batter level
+	 * 
 	 * @param medicationList
 	 * @param droneBean
 	 * @throws OverWeightException
@@ -144,6 +151,7 @@ public class DroneServiceImpl implements DroneService {
 	}
 
 	/**
+	 * return medication list of a given Drone
 	 * 
 	 * @param serinalNumber
 	 * @return
@@ -170,6 +178,8 @@ public class DroneServiceImpl implements DroneService {
 
 
 	/**
+	 * Update Drone. Only Model and status can be updated
+	 * 
 	 * @param serinalNumber
 	 * @return droneDto
 	 * @throws DroneDoesNotExistException
@@ -194,18 +204,22 @@ public class DroneServiceImpl implements DroneService {
 	}
 
 	/**
+	 * return avaialable drone fro loading
 	 * 
 	 * @return
 	 */
 	@Override
-	public List<DroneDto> getAvaialbleDrones() {
+	public List<DroneDto> getAvailableDrones() {
 		Optional<State> stateBeanResult = stateRepo.findById(StateEnum.LOADING.getId());
-		List<DroneDto> result = new ArrayList<DroneDto>();
+		List<DroneDto> result = new ArrayList<>();
 		List<Drone> droneBeanList = droneRepo.findByState(stateBeanResult.get());
 		droneBeanList.forEach(droneBean -> {
 			DroneDto droneDto = new DroneDto();
 			BeanUtils.copyProperties(droneBean, droneDto);
+			droneDto.setModel(ModelEnum.valueOf(droneBean.getModel().getModelName()));
+			droneDto.setState(StateEnum.valueOf(droneBean.getState().getStateName()));
 			result.add(droneDto);
+
 
 		});
 
@@ -213,6 +227,7 @@ public class DroneServiceImpl implements DroneService {
 	}
 
 	/**
+	 * return the battery level of give drone
 	 * 
 	 * @param serinalNumber
 	 * @return

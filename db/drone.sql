@@ -26,10 +26,10 @@ CONSTRAINT uq_model_name UNIQUE (model_name)
 ) ;
 
 -- Fill main data model
-insert into dronedb.model(id,model_name) values (1,'Lightweight');
-insert into dronedb.model(id,model_name) values (2,'Middleweight');
-insert into dronedb.model(id,model_name) values (3,'Cruiserweight');
-insert into dronedb.model(id,model_name) values (4,'Heavyweight');
+insert into dronedb.model(id,model_name) values (1,'LIGHTWEIGHT');
+insert into dronedb.model(id,model_name) values (2,'MIDDLEWEIGHT');
+insert into dronedb.model(id,model_name) values (3,'CRUSIEWEIGHTT');
+insert into dronedb.model(id,model_name) values (4,'HEAVEYWEIGHT');
 
 
 DROP TABLE IF EXISTS dronedb.state;
@@ -96,7 +96,7 @@ CONSTRAINT fk_drone_id foreign key(drone_id) references drone(id)
 ) ;
 
 
-DROP TABLE IF EXISTS dronedb.drone_battery_audit;
+DROP TABLE IF EXISTS dronedb.drone_audit;
 CREATE TABLE dronedb.drone_audit (
 id int  NOT NULL AUTO_INCREMENT,
 drone_id int NOT NULL,

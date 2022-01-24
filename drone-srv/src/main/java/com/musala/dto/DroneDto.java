@@ -30,6 +30,7 @@ public class DroneDto implements Serializable {
 	private StateEnum state;
 
 	@NotNull(message = "battery can not be null")
+	@Max(value = 100, message = "battery percentage should not exceed 100")
 	private Integer battery;
 
 	private Integer createdBy;

@@ -69,7 +69,7 @@ public class DroneController {
 	
 	@GetMapping("/drones")
 	public List<DroneDto> getAvaialbleDrones()  {
-		return srv.getAvaialbleDrones();
+		return srv.getAvailableDrones();
 	}
 	
 	

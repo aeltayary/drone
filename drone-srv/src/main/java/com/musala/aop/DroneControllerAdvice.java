@@ -21,6 +21,7 @@ import com.musala.dto.ErrorDto;
 import com.musala.enums.ErrorCodeEnum;
 import com.musala.exception.DroneAlreadyExistException;
 import com.musala.exception.DroneDoesNotExistException;
+import com.musala.exception.LowBatteryException;
 import com.musala.exception.OverWeightException;
 
 /**
@@ -53,6 +54,14 @@ public class DroneControllerAdvice {
 	@ExceptionHandler(OverWeightException.class)
 	public ErrorDto handleOverWeightException(OverWeightException ex) {
 		return new ErrorDto(ErrorCodeEnum.VALIDATION_ERROR, ex.getMessage(),new Date() );
+
+	}
+
+	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
+	@ResponseBody
+	@ExceptionHandler(LowBatteryException.class)
+	public ErrorDto handleLowBatteryException(LowBatteryException ex) {
+		return new ErrorDto(ErrorCodeEnum.VALIDATION_ERROR, ex.getMessage(), new Date());
 
 	}
 

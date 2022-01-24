@@ -29,7 +29,7 @@ public interface DroneService  {
 
 	public List<MedicationDto>  getMedicationList(String  serinalNumber) throws DroneDoesNotExistException;
 	
-	public List<DroneDto>  getAvaialbleDrones();
+	public List<DroneDto> getAvailableDrones();
 	
 	public String  getBatteryLevel(String  serinalNumber) throws DroneDoesNotExistException;
 	

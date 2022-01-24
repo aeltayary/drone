@@ -135,7 +135,7 @@ public class Drone implements Serializable {
 		return this.cargo;
 	}
 
-	public void setCargos(List<Cargo> cargo) {
+	public void setCargo(List<Cargo> cargo) {
 		this.cargo = cargo;
 	}
 
