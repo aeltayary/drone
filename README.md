@@ -14,6 +14,7 @@ For building and running the application you need:
 - DB_HOST, DB_PORT, DB_USER_NAME, DB_PASSWORD environment variables must be set to make the application able to locate the configuration
 - The application default port is 8080 and this can be configured when run
 - REST API definition is provided with the application using http://[host]:[port]/swagger-ui/index.html
+- The application log file will be created to be log/drone-log.log 
 
 ## build&run steps 
 
