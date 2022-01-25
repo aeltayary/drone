@@ -15,6 +15,7 @@ For building and running the application you need:
 - The application default port is 8080 and this can be configured when run
 - REST API definition is provided with the application using http://[host]:[port]/swagger-ui/index.html
 - The application log file will be created to be log/drone-log.log 
+- API rest accepts image to be sent as Base64 encoded string
 
 ## build&run steps 
 
